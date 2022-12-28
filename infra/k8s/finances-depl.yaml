@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finances-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: finances
+  template:
+    metadata:
+      labels:
+        app: finances
+    spec:
+      containers:
+        - name: finances
+          image: deanrtaylor/finances
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: RDS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rds-host
+                  key: RDS_HOST
+            - name: RDS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rds-user
+                  key: RDS_USER
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-password
+                  key: RDS_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: finances-srv
+spec:
+  selector:
+    app: finances
+  ports:
+    - name: finances
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

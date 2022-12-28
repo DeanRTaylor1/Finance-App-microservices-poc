@@ -4,8 +4,7 @@ import { confirmationEmailHandler } from '../services/nodemailer';
 import jwt from 'jsonwebtoken';
 import { Password } from '../services/password';
 import { User } from '../models/User';
-import { BadRequestError } from '../errors/common';
-import { validateRequest } from '../middlewares/validate-request';
+import { BadRequestError, validateRequest } from '@deanrtaylor/myfin-common';
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "finances",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,13 +24,15 @@
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/nodemailer": "^6.4.6",
+    "@types/pg": "^8.6.6",
     "cookie-session": "^2.0.0",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "express-validator": "^6.14.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.2",
+    "node-nats-streaming": "^0.3.2",
     "nodemailer": "^6.8.0",
+    "pg": "^8.8.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.8.4"
   },
@@ -39,7 +41,6 @@
     "@types/nodemailer": "^6.4.6",
     "@types/supertest": "^2.0.12",
     "jest": "^29.3.1",
-    "mongodb-memory-server": "^8.10.0",
     "supertest": "^6.3.1",
     "ts-jest": "^29.0.3"
   }

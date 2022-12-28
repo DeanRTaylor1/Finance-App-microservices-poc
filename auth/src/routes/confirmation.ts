@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Password } from '../services/password';
 import { User } from '../models/User';
-import { BadRequestError } from '../errors/common';
+import { BadRequestError } from '@deanrtaylor/myfin-common';
 
 const router = express.Router();
 
