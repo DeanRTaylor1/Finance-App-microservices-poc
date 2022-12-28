@@ -1,8 +1,9 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { Password } from '../services/password';
+import { UserCreatedPublisher } from '../events/user-created-publisher';
 import { User } from '../models/User';
 import { BadRequestError } from '@deanrtaylor/myfin-common';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -14,6 +15,10 @@ router.put('/api/users/confirmation', async (req: Request, res: Response) => {
   }
   user.confirmed = true;
   await user.save();
+
+  new UserCreatedPublisher(natsWrapper.client).publish({
+    email: user.email,
+  });
 
   const userJwt = jwt.sign(
     { id: user.id, username: user.username, email: user.email },

@@ -16,6 +16,14 @@ spec:
         - name: finances
           image: deanrtaylor/finances
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name #use pod name as client id as its unique
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'finances'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

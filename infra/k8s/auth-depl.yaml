@@ -16,6 +16,14 @@ spec:
         - name: auth
           image: deanrtaylor/financeauth
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name #use pod name as client id as its unique
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: 'finances'
             - name: MONGO_URI
               valueFrom:
                 secretKeyRef:
@@ -26,6 +34,11 @@ spec:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: NODEMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: nodemail-pass
+                  key: NODEMAIL_PASS
 ---
 apiVersion: v1
 kind: Service

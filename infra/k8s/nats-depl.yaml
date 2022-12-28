@@ -28,7 +28,7 @@ spec:
               '1',
               '-SD',
               '-cid', #clusterid
-              'ticketing',
+              'finances',
             ]
 ---
 apiVersion: v1

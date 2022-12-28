@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { requireAuth } from '@deanrtaylor/myfin-common';
-import { UserRepo } from '../repos/user-repo';
+import { User } from '../models/user-model';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.get(
   async (req: Request, res: Response) => {
     console.log('testing...');
 
-    const users = await UserRepo.find();
+    const users = await User.find();
 
     res.send(users);
   }
