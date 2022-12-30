@@ -1,8 +1,8 @@
-#microservices demonstration
+# microservices demonstration
 
-##finance tracking application
+## finance tracking application
 
-##Features:
+## Features:
 
 - Nextjs
 - express/TS
