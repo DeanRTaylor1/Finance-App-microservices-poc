@@ -4,7 +4,11 @@ import { app } from '../../app';
 it('clears cookie after signing out', async () => {
   await request(app)
     .post('/api/users/signup')
-    .send({ email: 'test@test.com', password: 'password' })
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      username: 'testTestss',
+    })
     .expect(201);
 
   const response = await request(app)

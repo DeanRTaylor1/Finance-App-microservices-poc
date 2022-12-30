@@ -11,19 +11,30 @@ it('fails when an email that does not exist is supplied', async () => {
 it('fails when an incorrect password is supplied', async () => {
   await request(app)
     .post('/api/users/signup')
-    .send({ email: 'test@test.com', password: 'password' })
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      username: 'testTests',
+    })
     .expect(201);
 
   await request(app)
     .post('/api/users/signin')
-    .send({ email: 'test@test.com', password: 'ssdffdf' })
+    .send({
+      email: 'test@test.com',
+      password: 'ssdffdf',
+    })
     .expect(400);
 });
 
 it('it responds with a cookie when given invalid credentials', async () => {
   await request(app)
     .post('/api/users/signup')
-    .send({ email: 'test@test.com', password: 'password' })
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+      username: 'testTests',
+    })
     .expect(201);
 
   const response = await request(app)

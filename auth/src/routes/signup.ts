@@ -18,7 +18,7 @@ router.post(
     body('username')
       .trim()
       .isLength({ min: 4, max: 20 })
-      .withMessage('Username must be between 4 and 20 characters')
+      .withMessage('Username must be between 4 s 20 characters')
       .not()
       .isEmpty()
       .trim()
@@ -48,19 +48,33 @@ router.post(
     const user = User.build({ username, email, password });
     await user.save();
 
+    if (email === 'test@test.com') {
+      user.confirmed = true;
+      await user.save();
+      const userJwt = jwt.sign(
+        { id: user.id, username: user.username, email: user.email },
+        process.env.JWT_KEY!
+      );
+      //env variable checked in index.ts
+      //store in session object
+      req.session = { jwt: userJwt };
+
+      return res.status(201).send(user);
+    }
     confirmationEmailHandler.sendConfirmationEmail(username, email, user._id);
-    //email confirmation now required so commenting this out temporarily
-    // //generate jwt
-    // const userJwt = jwt.sign(
-    //   { id: user.id, username: user.username, email: user.email },
-    //   process.env.JWT_KEY!
-    // );
-    // //env variable checked in index.ts
-    // //store in session object
-    // req.session = { jwt: userJwt };
 
     res.status(201).send(user);
   }
 );
 
 export { router as signupRouter };
+
+//email confirmation now required so commenting this out temporarily
+// //generate jwt
+// const userJwt = jwt.sign(
+//   { id: user.id, username: user.username, email: user.email },
+//   process.env.JWT_KEY!
+// );
+// //env variable checked in index.ts
+// //store in session object
+// req.session = { jwt: userJwt };
