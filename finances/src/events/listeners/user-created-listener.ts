@@ -15,7 +15,8 @@ export class UserCreatedListener extends Listener<UserCreatedEvent> {
     const user = await User.findByEmail(data.email);
     // if user exists
     if (user) {
-      throw new Error('User already exists');
+      console.log(`User with email: ${data.email} has already been processed`);
+      return msg.ack();
     }
     // update the users information to our finances postgres db
     const result = await User.insertNewUser(data.email, data.username);
