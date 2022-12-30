@@ -13,6 +13,7 @@ let mongo: any;
 //set up local mongo server to use for tests
 beforeAll(async () => {
   process.env.JWT_KEY = 'test';
+  process.env.TEST_EMAIL = 'test@test.com';
   mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
 

@@ -48,7 +48,7 @@ router.post(
     const user = User.build({ username, email, password });
     await user.save();
 
-    if (email === 'test@test.com') {
+    if (process.env.TEST_EMAIL && email === process.env.TEST_EMAIL) {
       user.confirmed = true;
       await user.save();
       const userJwt = jwt.sign(
