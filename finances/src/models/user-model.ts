@@ -13,10 +13,10 @@ class User {
     ]);
     return toCamelCase(rows)[0];
   }
-  static async insert(email: string) {
+  static async insertNewUser(email: string, username: string) {
     const { rows } = await pool.query(
-      `INSERT INTO users (email) VALUES ($1) RETURNING *;`,
-      [email]
+      `INSERT INTO users (email, username) VALUES ($1, $2) RETURNING *;`,
+      [email, username]
     );
     console.log(rows);
     return toCamelCase(rows)[0];

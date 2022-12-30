@@ -18,6 +18,7 @@ router.put('/api/users/confirmation', async (req: Request, res: Response) => {
 
   new UserCreatedPublisher(natsWrapper.client).publish({
     email: user.email,
+    username: user.username,
   });
 
   const userJwt = jwt.sign(

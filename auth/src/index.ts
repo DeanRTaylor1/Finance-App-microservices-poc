@@ -32,8 +32,9 @@ const start = async () => {
 
     process.on('SIGINT', () => natsWrapper.client.close()); //listen for interupt signal
     process.on('SIGTERM', () => natsWrapper.client.close()); //listen for terminate signal when using ctrl cs or rs
-
+    mongoose.set('strictQuery', true);
     await mongoose.connect(process.env.MONGO_URI!);
+
     console.log('Connected to Mongo');
   } catch (err) {
     console.error(err);
