@@ -5,7 +5,7 @@ export class confirmationEmailHandler {
     service: 'Outlook',
     auth: {
       user: 'deanrtaylor@hotmail.com',
-      pass: process.env.NODEMAIL_PASS,
+      pass: process.env.NODEMAIL_PASS 
     },
   });
 

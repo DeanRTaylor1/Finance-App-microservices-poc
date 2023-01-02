@@ -1,6 +1,15 @@
 import pool from '../pool';
 import toCamelCase from './util/to-camel-case';
 
+
+type UserProps = {
+  email: string,
+  monthlySalary: number,
+  username: string,
+  currency: string,
+  phone: string
+}
+
 class User {
   static async find() {
     const { rows } = await pool.query(`SELECT * FROM users;`);
@@ -20,6 +29,21 @@ class User {
     );
     console.log(rows);
     return toCamelCase(rows)[0];
+  }
+  static async count() {
+    const { rows } = await pool.query(`SELECT COUNT(*) FROM users`)
+    return toCamelCase(rows)[0]
+  }
+
+  static async updateExistingUser(user: UserProps) {
+    const { rows } = await pool.query(`
+      UPDATE users 
+      SET monthly_salary = $1,
+       currency = $2,
+       phone = $3
+      WHERE email = $4
+      RETURNING *;`, [user.monthlySalary, user.currency, user.phone, user.email])
+    return toCamelCase(rows)[0]
   }
 }
 

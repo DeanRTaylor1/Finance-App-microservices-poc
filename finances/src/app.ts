@@ -1,7 +1,8 @@
 import express from 'express';
 import 'express-async-errors';
 import cookieSession from 'cookie-session';
-import { indexFinancesRouter } from './routes/users';
+import { indexFinancesRouter } from './routes/index';
+import { updateUserRouter } from "./routes/update";
 
 import {
   errorHandler,
@@ -23,6 +24,7 @@ app.use(
 );
 app.use(currentUser);
 app.use(indexFinancesRouter);
+app.use(updateUserRouter)
 
 //not found 404
 app.all('*', async (req, res) => {
