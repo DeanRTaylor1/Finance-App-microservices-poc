@@ -1,18 +1,18 @@
 import express, { Request, Response } from 'express';
-import { requireAuth } from '@deanrtaylor/myfin-common';
+import { currentUser, requireAuth } from '@deanrtaylor/myfin-common';
 import { User } from '../models/user-model';
 
 const router = express.Router();
 
-router.get(
+router.post(
   '/api/finances',
-  requireAuth,
+  requireAuth, 
   async (req: Request, res: Response) => {
-    console.log('testing...');
+    const { email } = req.body;
 
-    const users = await User.find();
+    const userData = await User.findByEmail(email);
 
-    res.send(users);
+    res.send(userData);
   }
 );
 

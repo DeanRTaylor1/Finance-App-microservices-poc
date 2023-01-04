@@ -3,9 +3,11 @@ import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import BaseLayout from '../Components/Layouts/Base-Layout';
 import BuildClient from './api/build-client';
+import {currentUserProps } from '../TS/interfaces'
+
 
 interface CustomProps extends AppProps {
-  currentUser?: any;
+  currentUser?: currentUserProps 
 }
 
 export default function App({

@@ -29,7 +29,7 @@ const Confirm: React.FC = () => {
     <Fragment>
       {!isLoading && (
         <div className='h-full w-full flex justify-center items-center font-extrabold text3xl'>
-          Email Confirmed! If not redirected click here to go{' '}
+          Email Confirmed! If not redirected click here to go {' '}
           <Link
             className='underline underline-offset-4 font-extrabold text3xl'
             href='/'

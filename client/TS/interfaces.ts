@@ -2,7 +2,8 @@ import { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 
 interface MobileNavProps {
   authItems: React.ReactElement[];
-  navItems: React.ReactElement[];
+   navItems: React.ReactElement[];
+   profileItems: React.ReactElement[];
   scale: string;
   mobileNavHandler: (
     event: React.MouseEvent<SVGSVGElement, MouseEvent>,
@@ -40,7 +41,8 @@ type currentUser = {
 };
 
 interface CustomPropsWithChildren extends PropsWithChildren {
-  currentUser: currentUser;
+  currentUser?: currentUserProps;
+  
 }
 
 interface PropsWithAuth {
@@ -65,6 +67,15 @@ interface ArticleContainerProps {
   news_desk: string;
 }
 
+
+type currentUserProps = {
+    id:       string;
+    username: string;
+    email:    string;
+    iat:      number;
+    exp:      number;
+}
+
 export type {
   MobileNavProps,
   LogoProps,
@@ -77,4 +88,5 @@ export type {
   FormerrorsProps,
   ArticleContainerProps,
   Article,
+  currentUserProps
 };
